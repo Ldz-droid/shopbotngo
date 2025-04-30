@@ -818,7 +818,7 @@
       notification.classList.add('active');
       setTimeout(() => {
         notification.classList.remove('active', 'success');
-      }, 3000);
+      }, 5000);
     }
 
     function closeNotification() {
@@ -836,7 +836,6 @@
         .map(checkbox => checkbox.value)
         .join(', ') || 'Chưa chọn sản phẩm';
 
-      // Kiểm tra dữ liệu
       if (!name) {
         showNotification('Vui lòng nhập họ và tên!');
         document.getElementById("name").focus();
@@ -880,10 +879,22 @@
           body: formData,
           headers: {
             'Accept': 'application/json'
-          }
+          },
+          redirect: 'follow'
         });
 
-        const result = await response.json();
+        const text = await response.text();
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch (e) {
+          showNotification('Phát hiện yêu cầu đăng nhập. Vui lòng kiểm tra cấu hình Web App (quyền "Anyone").');
+          setTimeout(() => {
+            form.submit();
+          }, 3000);
+          return false;
+        }
+
         if (result.status === 'success') {
           showNotification('Đơn hàng đã gửi thành công!', true);
           form.style.display = "none";
@@ -902,7 +913,10 @@
           showNotification(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
         }
       } catch (error) {
-        showNotification('Lỗi kết nối, vui lòng thử lại.');
+        showNotification('Lỗi kết nối hoặc bị chặn bởi trình duyệt. Đang thử gửi theo cách khác...');
+        setTimeout(() => {
+          form.submit();
+        }, 3000);
       }
 
       return false;
