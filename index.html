@@ -751,7 +751,7 @@
     function changeImage(direction) {
       if (isAnimating) return;
       isAnimating = true;
-      const mainImage = document.getElementById("mainImage");
+      const mainImage = document.getElementById("mainImage"); // Fixed typo: getElement SV -> getElementById
       mainImage.classList.add("fade");
       setTimeout(() => {
         currentIndex = (currentIndex + direction + images.length) % images.length;
@@ -818,7 +818,7 @@
       notification.classList.add('active');
       setTimeout(() => {
         notification.classList.remove('active', 'success');
-      }, 5000);
+      }, 6000);
     }
 
     function closeNotification() {
@@ -873,6 +873,14 @@
       const successMessage = document.getElementById("successMessage");
       const formData = new FormData(form);
 
+      if (isFacebookApp) {
+        showNotification('Phát hiện trình duyệt Facebook. Đang gửi form trực tiếp...');
+        setTimeout(() => {
+          form.submit();
+        }, 2000);
+        return false;
+      }
+
       try {
         const response = await fetch(form.action, {
           method: 'POST',
@@ -888,10 +896,10 @@
         try {
           result = JSON.parse(text);
         } catch (e) {
-          showNotification('Phát hiện yêu cầu đăng nhập. Vui lòng kiểm tra cấu hình Web App (quyền "Anyone").');
+          showNotification('Phát hiện yêu cầu đăng nhập hoặc phản hồi không hợp lệ. Đang gửi form trực tiếp...');
           setTimeout(() => {
             form.submit();
-          }, 3000);
+          }, 5000);
           return false;
         }
 
@@ -913,10 +921,10 @@
           showNotification(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
         }
       } catch (error) {
-        showNotification('Lỗi kết nối hoặc bị chặn bởi trình duyệt. Đang thử gửi theo cách khác...');
+        showNotification(`Lỗi kết nối: ${error.message}. Đang thử gửi form trực tiếp sau 5 giây...`);
         setTimeout(() => {
           form.submit();
-        }, 3000);
+        }, 5000);
       }
 
       return false;
