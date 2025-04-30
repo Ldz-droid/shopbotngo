@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Hericium Yam Corn Paste - Thực Phẩm Dinh Dưỡng Cao Cấp</title>
-  <meta name="description" content="Bột ngô khoai mỡ nấm đầu khỉ - Thơm ngon, bổ dưỡng, dễ chế biến. Phù hợp cho người ăn kiêng, tiểu đường, người già, phụ nữ mang thai và trẻ nhỏ." />
-  <meta name="keywords" content="bột ngô, khoai mỡ, nấm đầu khỉ, sản phẩm dinh dưỡng, thực phẩm tốt cho sức khỏe, giảm cân, tiểu đường" />
-  <meta name="author" content="Hericium Corn Co." />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <meta name="description" content="Bột ngô khoai mỡ nấm đầu khỉ - Thơm ngon, bổ dưỡng, dễ chế biến. Phù hợp cho người ăn kiêng, tiểu đường, người già, phụ nữ mang thai và trẻ nhỏ.">
+  <meta name="keywords" content="bột ngô, khoai mỡ, nấm đầu khỉ, sản phẩm dinh dưỡng, thực phẩm tốt cho sức khỏe, giảm cân, tiểu đường">
+  <meta name="author" content="Hericium Corn Co.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
       box-sizing: border-box;
@@ -451,6 +451,8 @@
       align-items: center;
       gap: 0.5rem;
       transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
     }
 
     .product:hover {
@@ -462,6 +464,13 @@
     .product input[type="checkbox"] {
       transform: scale(1.5);
       accent-color: #ff7043;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      -webkit-appearance: checkbox;
+      -moz-appearance: checkbox;
+      appearance: checkbox;
     }
 
     .product.selected {
@@ -742,40 +751,39 @@
     <h2>ĐẶT MUA</h2>
     <div class="products" id="products">
       <label class="product">
-        <input type="checkbox" name="products[]" value="Gói 400g" onchange="updateSelectedProducts()"> 1 Gói 400g - 89.000đ + 30k ship
+        <input type="checkbox" name="products" value="Gói 400g" onchange="updateSelectedProducts()"> 1 Gói 400g - 89.000đ + 30k ship
       </label>
       <label class="product">
-        <input type="checkbox" name="products[]" value="Combo 2 gói" onchange="updateSelectedProducts()"> Combo 2 gói - 170.000đ + 30k ship
+        <input type="checkbox" name="products" value="Combo 2 gói" onchange="updateSelectedProducts()"> Combo 2 gói - 170.000đ + 30k ship
       </label>
       <label class="product">
-        <input type="checkbox" name="products[]" value="Combo 3 gói" onchange="updateSelectedProducts()"> Combo 3 gói - 250.000đ + miễn ship
+        <input type="checkbox" name="products" value="Combo 3 gói" onchange="updateSelectedProducts()"> Combo 3 gói - 250.000đ + miễn ship
       </label>
       <label class="product">
-        <input type="checkbox" name="products[]" value="Combo 5 gói" onchange="updateSelectedProducts()"> Combo 5 gói - 400.000đ + miễn ship
+        <input type="checkbox" name="products" value="Combo 5 gói" onchange="updateSelectedProducts()"> Combo 5 gói - 400.000đ + miễn ship
       </label>
     </div>
     <div class="selected-products">
       Sản phẩm đã chọn: <span id="selectedProductsList">Chưa chọn sản phẩm</span>
     </div>
-    <form id="orderForm" onsubmit="return false;">
-      <input type="hidden" name="timestamp" id="timestamp">
-      <input type="hidden" name="products" id="productsHidden">
+    <div id="orderFormContainer">
+      <input type="hidden" id="timestamp">
+      <input type="hidden" id="productsHidden">
       <label for="name">Họ và Tên</label>
       <input type="text" id="name" name="name" required placeholder="Nhập họ tên">
       <label for="phone">Số điện thoại</label>
       <input type="tel" id="phone" name="phone" required placeholder="Nhập số điện thoại" pattern="[0-9]{10}" title="Vui lòng nhập đúng 10 chữ số">
       <label for="address">Địa chỉ</label>
       <textarea id="address" name="address" rows="3" required placeholder="Nhập địa chỉ"></textarea>
-      <input type="hidden" name="ip" id="ip">
-      <button type="submit" class="submit-btn" id="submitBtn" onclick="validateAndSubmit()">XÁC NHẬN</button>
-    </form>
+      <input type="hidden" id="ip">
+      <button type="button" class="submit-btn" id="submitBtn" onclick="validateAndSubmit()">XÁC NHẬN</button>
+    </div>
     <div id="successMessage" style="display: none; color: #2e7d32; font-size: 1.2rem; margin-top: 1rem;">
       Đơn hàng đã gửi thành công! Chúng tôi sẽ liên hệ sớm.
     </div>
     <div id="errorMessage" style="display: none; color: #d32f2f; font-size: 1.2rem; margin-top: 1rem;">
       Có lỗi xảy ra. Vui lòng thử lại!
     </div>
-    <a href="#" onclick="window.open(window.location.href, '_system'); return false;" class="button" style="margin-top: 1rem;">Mở trong trình duyệt</a>
   </div>
 
   <div class="section" id="testimonials">
@@ -801,6 +809,7 @@
   </footer>
 
   <script>
+    // Particles animation
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -858,6 +867,7 @@
       canvas.height = window.innerHeight;
     });
 
+    // Popup handling
     function closePromo() {
       const popup = document.getElementById('promoPopup');
       popup.classList.remove('active');
@@ -873,6 +883,7 @@
       }, 2000);
     });
 
+    // Menu panel
     function toggleHericiumPanel() {
       document.getElementById('hericiumPanel').classList.toggle('active');
     }
@@ -881,11 +892,10 @@
       e.preventDefault();
       const section = document.getElementById(sectionId);
       section.scrollIntoView({ behavior: 'smooth' });
-      if (closePopup) {
-        closePromo();
-      }
+      if (closePopup) closePromo();
     }
 
+    // Image gallery
     const images = [
       "https://i.postimg.cc/66jSHhNf/a.jpg",
       "https://i.postimg.cc/zDnqL6mP/b.jpg",
@@ -930,6 +940,7 @@
       });
     }
 
+    // Countdown timer
     let countdownDuration = 3600 * 1000;
     let endTime = Date.now() + countdownDuration;
 
@@ -950,82 +961,69 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
+    // Checkbox handling
     function updateSelectedProducts() {
-      const selectedProducts = Array.from(document.querySelectorAll('.product input[type="checkbox"]:checked'))
+      const checkboxes = document.querySelectorAll('input[name="products"]');
+      const selectedProducts = Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value)
         .join(', ') || 'Chưa chọn sản phẩm';
+
       document.getElementById('selectedProductsList').textContent = selectedProducts;
       document.getElementById('productsHidden').value = selectedProducts;
-      const productLabels = document.querySelectorAll('.product');
-      productLabels.forEach(label => {
-        const checkbox = label.querySelector('input[type="checkbox"]');
+
+      checkboxes.forEach(checkbox => {
+        const label = checkbox.parentElement;
         label.classList.toggle('selected', checkbox.checked);
       });
     }
 
+    // IP fetching
     async function getIP() {
-      const ipApis = [
-        'https://api.ipify.org?format=json',
-        'https://api.ipgeolocation.io/getIp',
-        'https://ipapi.co/json/'
-      ];
-
-      for (const api of ipApis) {
-        try {
-          const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 2000);
-          const response = await fetch(api, { 
-            method: 'GET', 
-            mode: 'cors',
-            signal: controller.signal 
-          });
-          clearTimeout(timeout);
-          if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-          const data = await response.json();
-          return data.ip || 'Không xác định';
-        } catch (error) {
-          console.error(`Lỗi khi lấy IP từ ${api}:`, error.message);
-          continue;
-        }
+      const ipApi = 'https://api.ipify.org?format=json';
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 2000);
+        const response = await fetch(ipApi, { method: 'GET', mode: 'cors', signal: controller.signal });
+        clearTimeout(timeout);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await response.json();
+        return data.ip || 'Không xác định';
+      } catch (error) {
+        console.error(`Lỗi khi lấy IP:`, error.message);
+        return 'Không xác định';
       }
-      return 'Không xác định';
     }
 
+    // Notification handling
     function showNotification(message) {
       const notification = document.getElementById('notification');
       const notificationMessage = document.getElementById('notificationMessage');
       notificationMessage.textContent = message;
       notification.classList.add('active');
-      setTimeout(() => {
-        notification.classList.remove('active');
-      }, 3000);
+      setTimeout(() => notification.classList.remove('active'), 3000);
     }
 
     function closeNotification() {
-      const notification = document.getElementById('notification');
-      notification.classList.remove('active');
+      document.getElementById('notification').classList.remove('active');
     }
 
-    const PHONE = /^[0-9]{10}$/;
-
+    // Form submission
     async function validateAndSubmit() {
       const submitBtn = document.getElementById('submitBtn');
-      const form = document.getElementById('orderForm');
+      const formContainer = document.getElementById('orderFormContainer');
       const successMessage = document.getElementById('successMessage');
       const errorMessage = document.getElementById('errorMessage');
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Đang gửi...';
-
       successMessage.style.display = 'none';
       errorMessage.style.display = 'none';
 
       const name = document.getElementById('name').value.trim();
       const phone = document.getElementById('phone').value.trim();
       const address = document.getElementById('address').value.trim();
-      const selectedProducts = Array.from(document.querySelectorAll('.product input[type="checkbox"]:checked'))
-        .map(checkbox => checkbox.value)
-        .join(', ') || 'Chưa chọn sản phẩm';
+      const selectedProducts = document.getElementById('productsHidden').value;
 
       if (!name) {
         showNotification('Vui lòng nhập họ và tên!');
@@ -1043,7 +1041,7 @@
         return;
       }
 
-      if (!PHONE.test(phone)) {
+      if (!/^[0-9]{10}$/.test(phone)) {
         showNotification('Số điện thoại phải có đúng 10 chữ số!');
         document.getElementById('phone').focus();
         submitBtn.disabled = false;
@@ -1067,7 +1065,7 @@
       }
 
       const timestamp = new Date().toLocaleString('vi-VN');
-      const ip = await getIP().catch(() => 'Không xác định');
+      const ip = await getIP();
 
       const formData = new FormData();
       formData.append('timestamp', timestamp);
@@ -1082,22 +1080,25 @@
           method: 'POST',
           body: formData,
           mode: 'cors',
-          redirect: 'follow'
+          redirect: 'follow',
+          headers: {
+            'Accept': 'application/json'
+          }
         });
 
-        if (!response.ok) {
-          throw new Error(`Lỗi HTTP! Status: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error(`Lỗi HTTP! Status: ${response.status}`);
         const result = await response.json();
+
         if (result.status === 'success') {
-          form.style.display = 'none';
+          formContainer.style.display = 'none';
           successMessage.style.display = 'block';
           setTimeout(() => {
-            form.style.display = 'block';
+            formContainer.style.display = 'block';
             successMessage.style.display = 'none';
-            form.reset();
-            document.querySelectorAll('.product input[type="checkbox"]').forEach(cb => {
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('address').value = '';
+            document.querySelectorAll('input[name="products"]').forEach(cb => {
               cb.checked = false;
               cb.parentElement.classList.remove('selected');
             });
@@ -1112,7 +1113,7 @@
       } catch (error) {
         console.error('Lỗi khi gửi dữ liệu:', error);
         errorMessage.style.display = 'block';
-        errorMessage.textContent = `Có lỗi xảy ra: ${error.message}. Vui lòng thử mở trong trình duyệt gốc!`;
+        errorMessage.textContent = `Có lỗi xảy ra: ${error.message}. Vui lòng thử lại!`;
         submitBtn.disabled = false;
         submitBtn.textContent = 'XÁC NHẬN';
       }
