@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Hericium Yam Corn Paste - Thực Phẩm Dinh Dưỡng Cao Cấp</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 1rem; background: #fff8e1; color: #4e342e; }
+    form { max-width: 500px; margin: auto; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h1 { text-align: center; margin-bottom: 1rem; }
+    input, textarea, button { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
+    button { background: #ff7043; color: white; font-weight: bold; cursor: pointer; }
+    button:hover { background: #ef5350; }
+    .notice { text-align: center; color: green; display: none; margin-top: 1rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Đặt Hàng Hericium</h1>
+  <form id="orderForm">
+    <input type="text" name="name" placeholder="Họ và tên" required>
+    <input type="tel" name="phone" placeholder="Số điện thoại" pattern="[0-9]{10}" required>
+    <textarea name="address" placeholder="Địa chỉ giao hàng" required></textarea>
+    <input type="text" name="products" placeholder="Sản phẩm muốn mua (VD: Combo 3 gói)" required>
+    <button type="submit">Gửi đơn hàng</button>
+  </form>
+  <div class="notice" id="notice">Đơn hàng đã gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.</div>
+
+  <script>
+    const form = document.getElementById('orderForm');
+    const notice = document.getElementById('notice');
+    const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // <-- THAY BẰNG LINK GOOGLE APPS SCRIPT CỦA BẠN
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(scriptURL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      }).then(() => {
+        form.reset();
+        notice.style.display = 'block';
+      }).catch(() => {
+        alert('Có lỗi xảy ra. Vui lòng thử lại.');
+      });
+    });
+  </script>
+</body>
+</html>
