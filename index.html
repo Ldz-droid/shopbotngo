@@ -42,7 +42,6 @@
     <input type="text" name="name" placeholder="Họ và tên" required>
     <input type="tel" name="phone" placeholder="Số điện thoại" pattern="[0-9]{10}" required>
     <textarea name="address" placeholder="Địa chỉ giao hàng" required></textarea>
-    <input type="text" name="products" placeholder="Sản phẩm muốn mua (VD: Combo 3 gói)" required>
 
     <div class="options">
       <label for="option1">
@@ -77,7 +76,13 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      // Lấy giá trị từ sản phẩm đã chọn
+      const selectedProduct = document.querySelector('input[name="product"]:checked').value;
+
+      // Thêm thông tin sản phẩm vào FormData
       const formData = new FormData(form);
+      formData.append('products', selectedProduct);
 
       fetch(scriptURL, {
         method: 'POST',
