@@ -3,86 +3,379 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <title>Hericium Yam Corn Paste - Thực Phẩm Dinh Dưỡng Cao Cấp</title>
+  <title>Bột Ngô Dinh Dưỡng - Thực Phẩm Dinh Dưỡng Cao Cấp</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 1rem; background: #fff8e1; color: #4e342e; }
-    form { max-width: 500px; margin: auto; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    h1 { text-align: center; margin-bottom: 1rem; }
-    input, textarea, button { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem; }
-    button { background: #ff7043; color: white; font-weight: bold; cursor: pointer; }
-    button:hover { background: #ef5350; }
-    .notice { text-align: center; color: green; display: none; margin-top: 1rem; font-weight: bold; }
-    .error { text-align: center; color: red; display: none; margin-top: 1rem; font-weight: bold; }
-    .images img { width: 100%; max-width: 200px; margin: 0.5rem; }
-    .review { text-align: center; margin-top: 2rem; }
-    .options { display: flex; justify-content: space-between; }
-    .options label { flex: 1; text-align: center; padding: 1rem; background: #ff7043; color: white; cursor: pointer; border-radius: 8px; margin: 0 0.5rem; }
-    .options label:hover { background: #ef5350; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(to bottom, #fff8e1, #ffebee);
+      color: #4e342e;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #d81b60;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Carousel Styles */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: none;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .carousel img.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* Buy Now Button */
+    .buy-now {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .buy-now button {
+      background: #d81b60;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .buy-now button:hover {
+      background: #b71c1c;
+      transform: scale(1.05);
+    }
+
+    /* Features Section */
+    .features {
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .features h2 {
+      text-align: center;
+      color: #d81b60;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: #fff3e0;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-item i {
+      font-size: 2.5rem;
+      color: #d81b60;
+      margin-bottom: 1rem;
+    }
+
+    .feature-item h3 {
+      color: #4e342e;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Form Styles */
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #d81b60;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      background: #d81b60;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #b71c1c;
+    }
+
+    .notice, .error {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+      display: none;
+    }
+
+    .notice {
+      color: #2e7d32;
+    }
+
+    .error {
+      color: #d32f2f;
+    }
+
+    /* Product Options */
+    .options {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .options label {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: #ffccbc;
+      color: #4e342e;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .options input {
+      margin-right: 1rem;
+      width: 24px;
+      height: 24px;
+    }
+
+    .options label:hover {
+      background: #ffab91;
+    }
+
+    .options input:checked + span {
+      font-weight: bold;
+      color: #d81b60;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .carousel img {
+        height: 300px;
+      }
+
+      .features h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .buy-now button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .options label {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Hericium Yam Corn Paste - Thực Phẩm Dinh Dưỡng Cao Cấp</h1>
+  <div class="container">
+    <h1>Hericium Yam Corn Paste - Thực Phẩm Dinh Dưỡng Cao Cấp</h1>
 
-  <div class="images">
-    <img src="https://i.postimg.cc/66jSHhNf/a.jpg" alt="Hericium Image 1">
-    <img src="https://i.postimg.cc/zDnqL6mP/b.jpg" alt="Hericium Image 2">
-    <img src="https://i.postimg.cc/J0RvHTJ9/c.jpg" alt="Hericium Image 3">
-    <img src="https://i.postimg.cc/c1DXc4NK/d.jpg" alt="Hericium Image 4">
-    <img src="https://i.postimg.cc/sDQ99Yc8/e.jpg" alt="Hericium Image 5">
-  </div>
-
-  <div class="review">
-    <h2>Đánh Giá Sản Phẩm</h2>
-    <p>"Sản phẩm tuyệt vời, dễ sử dụng, chất lượng vượt trội!" - Minh T.</p>
-    <p>"Thực phẩm dinh dưỡng rất tốt cho sức khỏe, tôi đã dùng lâu dài và thấy cải thiện rõ rệt!" - Lan H.</p>
-    <p>"Mùi vị tự nhiên, rất thích hợp cho gia đình. Dễ dàng đặt mua và giao hàng nhanh chóng." - Đức K.</p>
-  </div>
-
-  <form id="orderForm">
-    <input type="text" name="name" placeholder="Họ và tên" required>
-    <input type="tel" name="phone" placeholder="Số điện thoại" pattern="[0-9]{10}" required>
-    <textarea name="address" placeholder="Địa chỉ giao hàng" required></textarea>
-
-    <div class="options">
-      <label for="option1">
-        <input type="radio" name="product" value="1 Gói 400g - 89.000đ + 30k ship" id="option1" required>
-        1 Gói 400g - 89.000đ + 30k ship
-      </label>
-      <label for="option2">
-        <input type="radio" name="product" value="Combo 2 gói - 170.000đ + 30k ship" id="option2" required>
-        Combo 2 gói - 170.000đ + 30k ship
-      </label>
-      <label for="option3">
-        <input type="radio" name="product" value="Combo 3 gói - 250.000đ + miễn ship" id="option3" required>
-        Combo 3 gói - 250.000đ + miễn ship
-      </label>
-      <label for="option4">
-        <input type="radio" name="product" value="Combo 5 gói - 400.000đ + miễn ship" id="option4" required>
-        Combo 5 gói - 400.000đ + miễn ship
-      </label>
+    <!-- Carousel -->
+    <div class="carousel">
+      <img src="https://i.postimg.cc/66jSHhNf/a.jpg" alt="Hericium Image 1" class="active">
+      <img src="https://i.postimg.cc/zDnqL6mP/b.jpg" alt="Hericium Image 2">
+      <img src="https://i.postimg.cc/J0RvHTJ9/c.jpg" alt="Hericium Image 3">
+      <img src="https://i.postimg.cc/c1DXc4NK/d.jpg" alt="Hericium Image 4">
+      <img src="https://i.postimg.cc/sDQ99Yc8/e.jpg" alt="Hericium Image 5">
     </div>
 
-    <button type="submit">Gửi đơn hàng</button>
-  </form>
+    <!-- Buy Now Button -->
+    <div class="buy-now">
+      <button onclick="scrollToForm()">Mua Ngay</button>
+    </div>
 
-  <div class="notice" id="notice">Đơn hàng đã gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.</div>
-  <div class="error" id="errorNotice">Có lỗi xảy ra. Vui lòng thử lại.</div>
+    <!-- Features Section -->
+    <section class="features">
+      <h2>Đặc Điểm Nổi Bật</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <i class="fas fa-seedling"></i>
+          <h3>Nguyên Liệu Tự Nhiên</h3>
+          <p>Được làm từ ngô, khoai và nấm Hericium chất lượng cao, không chất bảo quản.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-heart"></i>
+          <h3>Tốt Cho Sức Khỏe</h3>
+          <p>Cung cấp dinh dưỡng dồi dào, hỗ trợ tiêu hóa và tăng cường sức đề kháng.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-star"></i>
+          <h3>Hương Vị Thơm Ngon</h3>
+          <p>Vị ngọt tự nhiên, dễ chế biến, phù hợp cho mọi lứa tuổi.</p>
+        </div>
+        <div class="feature-item">
+          <i class="fas fa-leaf"></i>
+          <h3>Thân Thiện Môi Trường</h3>
+          <p>Bao bì phân hủy sinh học, góp phần bảo vệ môi trường.</p>
+        </div>
+      </div>
+    </section>
 
+    <!-- Order Form -->
+    <form id="orderForm">
+      <input type="text" name="name" placeholder="Họ và tên" required>
+      <input type="tel" name="phone" placeholder="Số điện thoại" pattern="[0-9]{10}" required>
+      <textarea name="address" placeholder="Địa chỉ giao hàng" required></textarea>
+
+      <div class="options">
+        <label for="option1">
+          <input type="checkbox" name="product" value="1 Gói 400g - 89.000đ + 30k ship" id="option1">
+          <span>1 Gói 400g - 89.000đ + 30k ship</span>
+        </label>
+        <label for="option2">
+          <input type="checkbox" name="product" value="Combo 2 gói - 170.000đ + 30k ship" id="option2">
+          <span>Combo 2 gói - 170.000đ + 30k ship</span>
+        </label>
+        <label for="option3">
+          <input type="checkbox" name="product" value="Combo 3 gói - 250.000đ + miễn ship" id="option3">
+          <span>Combo 3 gói - 250.000đ + miễn ship</span>
+        </label>
+        <label for="option4">
+          <input type="checkbox" name="product" value="Combo 5 gói - 400.000đ + miễn ship" id="option4">
+          <span>Combo 5 gói - 400.000đ + miễn ship</span>
+        </label>
+      </div>
+
+      <button type="submit">Gửi Đơn Hàng</button>
+    </form>
+
+    <div class="notice" id="notice">Đơn hàng đã gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.</div>
+    <div class="error" id="errorNotice">Có lỗi xảy ra. Vui lòng thử lại.</div>
+  </div>
+
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script>
+    // Carousel Functionality
+    const images = document.querySelectorAll('.carousel img');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.remove('active');
+        if (i === index) {
+          img.classList.add('active');
+        }
+      });
+    }
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    }, 3000);
+
+    // Scroll to Form
+    function scrollToForm() {
+      document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Form Submission
     const form = document.getElementById('orderForm');
     const notice = document.getElementById('notice');
     const errorNotice = document.getElementById('errorNotice');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwlzLhrLylmdJsMfb-1GgmRAg-CvChHyvejnCWlJBd2HNayCsY-hGUhwYgnKAH2DYkmLQ/exec'; // <-- THAY BẰNG LINK GOOGLE APPS SCRIPT CỦA BẠN
+    const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      const selectedProducts = [];
+      const selectedCheckboxes = document.querySelectorAll('input[name="product"]:checked');
+      selectedCheckboxes.forEach(checkbox => {
+        selectedProducts.push(checkbox.value);
+      });
 
-      // Lấy giá trị từ sản phẩm đã chọn
-      const selectedProduct = document.querySelector('input[name="product"]:checked').value;
+      if (selectedProducts.length === 0) {
+        errorNotice.textContent = 'Vui lòng chọn ít nhất một sản phẩm.';
+        errorNotice.style.display = 'block';
+        notice.style.display = 'none';
+        return;
+      }
 
-      // Thêm thông tin sản phẩm vào FormData
       const formData = new FormData(form);
-      formData.append('products', selectedProduct);
+      formData.append('products', selectedProducts.join(', '));
 
       fetch(scriptURL, {
         method: 'POST',
@@ -94,12 +387,13 @@
             notice.style.display = 'block';
             errorNotice.style.display = 'none';
           } else {
-            errorNotice.textContent = data.message;
+            errorNotice.textContent = data.message || 'Có lỗi xảy ra. Vui lòng thử lại.';
             errorNotice.style.display = 'block';
             notice.style.display = 'none';
           }
         }).catch(error => {
           console.error("Lỗi:", error);
+          errorNotice.textContent = 'Có lỗi xảy ra. Vui lòng thử lại.';
           errorNotice.style.display = 'block';
           notice.style.display = 'none';
         });
