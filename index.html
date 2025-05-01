@@ -12,6 +12,7 @@
     button { background: #ff7043; color: white; font-weight: bold; cursor: pointer; }
     button:hover { background: #ef5350; }
     .notice { text-align: center; color: green; display: none; margin-top: 1rem; font-weight: bold; }
+    .error { text-align: center; color: red; display: none; margin-top: 1rem; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -24,10 +25,12 @@
     <button type="submit">Gửi đơn hàng</button>
   </form>
   <div class="notice" id="notice">Đơn hàng đã gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.</div>
+  <div class="error" id="errorNotice">Có lỗi xảy ra. Vui lòng thử lại.</div>
 
   <script>
     const form = document.getElementById('orderForm');
     const notice = document.getElementById('notice');
+    const errorNotice = document.getElementById('errorNotice');
     const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // <-- THAY BẰNG LINK GOOGLE APPS SCRIPT CỦA BẠN
 
     form.addEventListener('submit', function(e) {
@@ -38,11 +41,21 @@
         method: 'POST',
         body: formData,
         mode: 'no-cors'
-      }).then(() => {
-        form.reset();
-        notice.style.display = 'block';
+      }).then(response => {
+        return response.json();
+      }).then(data => {
+        if (data.status === 'success') {
+          form.reset();
+          notice.style.display = 'block';
+          errorNotice.style.display = 'none';
+        } else {
+          errorNotice.textContent = data.message;
+          errorNotice.style.display = 'block';
+          notice.style.display = 'none';
+        }
       }).catch(() => {
-        alert('Có lỗi xảy ra. Vui lòng thử lại.');
+        errorNotice.style.display = 'block';
+        notice.style.display = 'none';
       });
     });
   </script>
