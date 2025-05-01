@@ -13,17 +13,59 @@
     button:hover { background: #ef5350; }
     .notice { text-align: center; color: green; display: none; margin-top: 1rem; font-weight: bold; }
     .error { text-align: center; color: red; display: none; margin-top: 1rem; font-weight: bold; }
+    .images img { width: 100%; max-width: 200px; margin: 0.5rem; }
+    .review { text-align: center; margin-top: 2rem; }
+    .options { display: flex; justify-content: space-between; }
+    .options label { flex: 1; text-align: center; padding: 1rem; background: #ff7043; color: white; cursor: pointer; border-radius: 8px; margin: 0 0.5rem; }
+    .options label:hover { background: #ef5350; }
   </style>
 </head>
 <body>
-  <h1>Đặt Hàng Hericium</h1>
+  <h1>Hericium Yam Corn Paste - Thực Phẩm Dinh Dưỡng Cao Cấp</h1>
+
+  <div class="images">
+    <img src="https://i.postimg.cc/66jSHhNf/a.jpg" alt="Hericium Image 1">
+    <img src="https://i.postimg.cc/zDnqL6mP/b.jpg" alt="Hericium Image 2">
+    <img src="https://i.postimg.cc/J0RvHTJ9/c.jpg" alt="Hericium Image 3">
+    <img src="https://i.postimg.cc/c1DXc4NK/d.jpg" alt="Hericium Image 4">
+    <img src="https://i.postimg.cc/sDQ99Yc8/e.jpg" alt="Hericium Image 5">
+  </div>
+
+  <div class="review">
+    <h2>Đánh Giá Sản Phẩm</h2>
+    <p>"Sản phẩm tuyệt vời, dễ sử dụng, chất lượng vượt trội!" - Minh T.</p>
+    <p>"Thực phẩm dinh dưỡng rất tốt cho sức khỏe, tôi đã dùng lâu dài và thấy cải thiện rõ rệt!" - Lan H.</p>
+    <p>"Mùi vị tự nhiên, rất thích hợp cho gia đình. Dễ dàng đặt mua và giao hàng nhanh chóng." - Đức K.</p>
+  </div>
+
   <form id="orderForm">
     <input type="text" name="name" placeholder="Họ và tên" required>
     <input type="tel" name="phone" placeholder="Số điện thoại" pattern="[0-9]{10}" required>
     <textarea name="address" placeholder="Địa chỉ giao hàng" required></textarea>
     <input type="text" name="products" placeholder="Sản phẩm muốn mua (VD: Combo 3 gói)" required>
+
+    <div class="options">
+      <label for="option1">
+        <input type="radio" name="product" value="1 Gói 400g - 89.000đ + 30k ship" id="option1" required>
+        1 Gói 400g - 89.000đ + 30k ship
+      </label>
+      <label for="option2">
+        <input type="radio" name="product" value="Combo 2 gói - 170.000đ + 30k ship" id="option2" required>
+        Combo 2 gói - 170.000đ + 30k ship
+      </label>
+      <label for="option3">
+        <input type="radio" name="product" value="Combo 3 gói - 250.000đ + miễn ship" id="option3" required>
+        Combo 3 gói - 250.000đ + miễn ship
+      </label>
+      <label for="option4">
+        <input type="radio" name="product" value="Combo 5 gói - 400.000đ + miễn ship" id="option4" required>
+        Combo 5 gói - 400.000đ + miễn ship
+      </label>
+    </div>
+
     <button type="submit">Gửi đơn hàng</button>
   </form>
+
   <div class="notice" id="notice">Đơn hàng đã gửi thành công! Chúng tôi sẽ liên hệ với bạn sớm nhất.</div>
   <div class="error" id="errorNotice">Có lỗi xảy ra. Vui lòng thử lại.</div>
 
@@ -31,7 +73,7 @@
     const form = document.getElementById('orderForm');
     const notice = document.getElementById('notice');
     const errorNotice = document.getElementById('errorNotice');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwlzLhrLylmdJsMfb-1GgmRAg-CvChHyvejnCWlJBd2HNayCsY-hGUhwYgnKAH2DYkmLQ/exec'; // <-- THAY BẰNG LINK GOOGLE APPS SCRIPT CỦA BẠN
+    const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // <-- THAY BẰNG LINK GOOGLE APPS SCRIPT CỦA BẠN
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
